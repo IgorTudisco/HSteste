@@ -1,0 +1,37 @@
+#version: '3.8'
+
+# services:
+#   abp_host:
+#     image: abp/host
+#     environment:
+#       ASPNETCORE_ENVIRONMENT: 'Staging'
+#       ConnectionStrings__Default: 'Server=10.0.75.1; Database=HStesteDb; User=HStesteUser; Password=YourStrongPassword;TrustServerCertificate=True;'
+#       App__ServerRootAddress: 'http://localhost:44311/'
+#       App__ClientRootAddress: 'http://localhost:4200/'
+#       App__CorsOrigins: 'http://localhost:4200'
+#       TZ: 'America/Toronto'
+#       Kestrel__Endpoints__Http__Url: 'http://+:80'
+#     ports:
+#       - '44311:80'
+#     volumes:
+#       - './Host-Logs:/app/App_Data/Logs'
+#     restart: always
+
+#   abp_ng:
+#     image: abp/ng
+#     ports:
+#       - '4200:80'
+
+services:
+  postgres:
+    image: postgres:latest # Usa a imagem oficial do PostgreSQL
+    container_name: meu-postgres # Nome do container
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres' # Usuário do banco
+      POSTGRES_PASSWORD: '@Root123' # Senha do banco
+      POSTGRES_DB: 'HStesteDb' # Nome do banco
+    ports:
+      - '5432:5432' # Expõe a porta do PostgreSQL
+    volumes:
+      - './Host-Logs:/app/App_Data/Logs' # Persistência de dados
