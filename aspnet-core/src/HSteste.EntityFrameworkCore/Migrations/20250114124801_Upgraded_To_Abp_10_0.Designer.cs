@@ -4,6 +4,7 @@ using HSteste.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HSteste.Migrations
 {
     [DbContext(typeof(HStesteDbContext))]
-    partial class HStesteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250114124801_Upgraded_To_Abp_10_0")]
+    partial class Upgraded_To_Abp_10_0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
