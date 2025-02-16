@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HSteste.Migrations
 {
     [DbContext(typeof(HStesteDbContext))]
-    [Migration("20250215223655_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250216130138_Funcionario")]
+    partial class Funcionario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1581,6 +1581,64 @@ namespace HSteste.Migrations
                     b.HasIndex("TenantId", "NormalizedUserName");
 
                     b.ToTable("AbpUsers");
+                });
+
+            modelBuilder.Entity("HSteste.Core.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cargo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cep")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DataAdmissao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DataDemissao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Endereco")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Pais")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Salario")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Setor")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telefone")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("HSteste.MultiTenancy.Tenant", b =>

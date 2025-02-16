@@ -5,7 +5,7 @@
 namespace HSteste.Migrations
 {
     /// <inheritdoc />
-    public partial class FuncionarioId : Migration
+    public partial class ApplyingChanges : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -5,7 +5,7 @@
 namespace HSteste.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class DateTimeNew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

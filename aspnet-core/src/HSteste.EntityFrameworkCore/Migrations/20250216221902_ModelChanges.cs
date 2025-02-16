@@ -5,20 +5,20 @@
 namespace HSteste.Migrations
 {
     /// <inheritdoc />
-    public partial class Upgraded_To_Abp_10_0 : Migration
+    public partial class ModelChanges : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Parameters",
-                table: "AbpAuditLogs",
-                type: "nvarchar(2048)",
-                maxLength: 2048,
-                nullable: true,
+                name: "Nome",
+                table: "Funcionarios",
+                type: "character varying(255)",
+                maxLength: 255,
+                nullable: false,
+                defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(1024)",
-                oldMaxLength: 1024,
+                oldType: "text",
                 oldNullable: true);
         }
 
@@ -26,15 +26,13 @@ namespace HSteste.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Parameters",
-                table: "AbpAuditLogs",
-                type: "nvarchar(1024)",
-                maxLength: 1024,
+                name: "Nome",
+                table: "Funcionarios",
+                type: "text",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(2048)",
-                oldMaxLength: 2048,
-                oldNullable: true);
+                oldType: "character varying(255)",
+                oldMaxLength: 255);
         }
     }
 }

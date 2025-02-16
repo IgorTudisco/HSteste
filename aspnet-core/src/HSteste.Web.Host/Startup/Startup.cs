@@ -17,6 +17,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using HSteste.Application.Services;
+using HSteste.Web.Host.Controllers;
 
 namespace HSteste.Web.Host.Startup
 {
@@ -42,6 +44,10 @@ namespace HSteste.Web.Host.Startup
             {
                 options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
             });
+
+            services.AddScoped<FuncionarioService>();
+            services.AddScoped<IFuncionarioService, FuncionarioService>();
+            services.AddScoped<FuncionarioController>();
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);

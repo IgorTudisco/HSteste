@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HSteste.Migrations
 {
     [DbContext(typeof(HStesteDbContext))]
-    [Migration("20250216000925_FuncionarioId")]
-    partial class FuncionarioId
+    [Migration("20250216212115_DateTimeNew")]
+    partial class DateTimeNew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
