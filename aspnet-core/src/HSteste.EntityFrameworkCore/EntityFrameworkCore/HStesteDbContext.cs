@@ -13,6 +13,7 @@ namespace HSteste.EntityFrameworkCore
     public class HStesteDbContext : AbpZeroDbContext<Tenant, Role, User, HStesteDbContext>
     {
         /* Define a DbSet for each entity of the application */
+        // DbSet was defined for the Funcionario entity
         public DbSet<Funcionario> Funcionarios { get; set; }
 
         public HStesteDbContext(DbContextOptions<HStesteDbContext> options)
