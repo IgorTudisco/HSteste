@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Application.Services;
-using Abp.Application.Services.Dto;
 using HSteste.Application.Services.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HSteste.Application.Services
 {
@@ -14,60 +14,41 @@ namespace HSteste.Application.Services
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="createFuncionarioDto"></param>
     /// <returns></returns>
-    Task<List<GetFuncionarioDto>> GetFuncionarios();
+    [HttpPost]
+    public Task<CreateFuncionarioDto> PostFuncionario([FromBody] CreateFuncionarioDto createFuncionarioDto);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public Task<IActionResult> GetAllFuncionarios();
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<GetFuncionarioDto> GetFuncionarioById(int id);
+    [HttpGet("{id}")]
+    public Task<IActionResult> GetFuncionarioById([FromQuery] int id);
+
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="input"></param>
+    /// <param name="updateFuncionarioDto"></param>
     /// <returns></returns>
-    Task<GetFuncionarioDto> CreateFuncionario(CreateFuncionarioDto input);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    Task<GetFuncionarioDto> UpdateFuncionario(UpdateFuncionarioDto input);
+    [HttpPut]
+    public Task<IActionResult> PutFuncionario([FromBody] UpdateFuncionarioDto updateFuncionarioDto);
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task DeleteFuncionario(int id);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    Task CreateAsync(CreateFuncionarioDto input);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    Task UpdateAsync(UpdateFuncionarioDto input);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    Task DeleteAsync(DeleteFuncionarioDto input);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    Task<GetFuncionarioDto> GetAsync(GetFuncionarioDto input);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    Task<ListResultDto<GetFuncionarioDto>> GetAllAsync();
+    [HttpDelete("{id}")]
+    public Task<IActionResult> DeleteFuncionario([FromQuery] int id);
+
   }
 }

@@ -68,9 +68,15 @@ namespace HSteste.Application.Services
     /// <returns></returns>
     public async Task<GetFuncionarioDto> UpdateFuncionario(UpdateFuncionarioDto input)
     {
-      var funcionario = await _funcionarioRepository.GetAsync(input.Id);
-      _mapper.Map(input, funcionario);
-      await _funcionarioRepository.UpdateAsync(funcionario);
+
+      //_mapper.Map(input, funcionario);
+      var funcionario = _mapper.Map<Funcionario>(input);
+      funcionario = _funcionarioRepository.Update(funcionario);
+      if (funcionario == null || funcionario.Id == null)
+      {
+        return null;
+      }
+
       return _mapper.Map<GetFuncionarioDto>(funcionario);
     }
 
