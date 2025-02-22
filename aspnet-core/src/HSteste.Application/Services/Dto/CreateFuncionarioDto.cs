@@ -2,7 +2,7 @@ using Abp.Application.Services.Dto;
 
 namespace HSteste.Application.Services.Dto
 {
-  public class CreateFuncionarioDto : EntityDto<int>
+  public class CreateFuncionarioDto
   {
     public string? Nome { get; set; }
     public string? Cpf { get; set; }

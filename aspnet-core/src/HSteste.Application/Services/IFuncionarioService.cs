@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using HSteste.Application.Services.Dto;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HSteste.Application.Services
@@ -17,14 +18,7 @@ namespace HSteste.Application.Services
     /// <param name="createFuncionarioDto"></param>
     /// <returns></returns>
     [HttpPost]
-    public Task<CreateFuncionarioDto> PostFuncionario([FromBody] CreateFuncionarioDto createFuncionarioDto);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    public Task<IActionResult> GetAllFuncionarios();
+    public Task<IResult> PostFuncionarioAsync([FromBody] CreateFuncionarioDto createFuncionarioDto);
 
     /// <summary>
     /// 
@@ -32,7 +26,14 @@ namespace HSteste.Application.Services
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public Task<IActionResult> GetFuncionarioById([FromQuery] int id);
+    public Task<IResult> GetFuncionarioByIdAsync([FromRoute] int id);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public Task<IResult> GetAllFuncionariosAsync();
 
     /// <summary>
     /// 
@@ -40,7 +41,7 @@ namespace HSteste.Application.Services
     /// <param name="updateFuncionarioDto"></param>
     /// <returns></returns>
     [HttpPut]
-    public Task<IActionResult> PutFuncionario([FromBody] UpdateFuncionarioDto updateFuncionarioDto);
+    public Task<IResult> PutFuncionarioAsync([FromBody] UpdateFuncionarioDto updateFuncionarioDto);
 
     /// <summary>
     /// 
@@ -48,7 +49,7 @@ namespace HSteste.Application.Services
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    public Task<IActionResult> DeleteFuncionario([FromQuery] int id);
+    public Task<IResult> DeleteFuncionarioAsync([FromRoute] int id);
 
   }
 }

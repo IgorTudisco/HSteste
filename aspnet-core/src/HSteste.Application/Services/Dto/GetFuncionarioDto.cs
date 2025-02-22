@@ -2,8 +2,9 @@ using Abp.Application.Services.Dto;
 
 namespace HSteste.Application.Services.Dto
 {
-  public class GetFuncionarioDto : EntityDto<int>
+  public class GetFuncionarioDto
   {
+    public int? Id { get; set; }
     public string? Nome { get; set; }
     public string? Cpf { get; set; }
     public string? Email { get; set; }

@@ -2,8 +2,9 @@ using Abp.Application.Services.Dto;
 
 namespace HSteste.Application.Services.Dto
 {
-  public class DeleteFuncionarioDto : EntityDto<int>
+  public class DeleteFuncionarioDto
   {
+    public int? Id { get; set; }
     public string? Nome { get; set; }
     public string? Cpf { get; set; }
     public string? Email { get; set; }

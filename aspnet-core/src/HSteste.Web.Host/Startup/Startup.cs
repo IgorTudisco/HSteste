@@ -45,9 +45,7 @@ namespace HSteste.Web.Host.Startup
                 options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
             });
 
-            services.AddScoped<FuncionarioService>();
-            services.AddScoped<IFuncionarioService, FuncionarioService>();
-            services.AddScoped<FuncionarioController>();
+            services.AddTransient<IFuncionarioService, FuncionarioService>();
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
