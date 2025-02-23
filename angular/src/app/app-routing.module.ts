@@ -26,6 +26,11 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard]
                     },
                     {
+                        path: 'deletar',
+                        loadChildren: () => import('./funcionario/deletar/deletar.module').then((m) => m.DeletarModule),
+                        canActivate: [AppRouteGuard]
+                    },
+                    {
                         path: 'listar',
                         loadChildren: () => import('./funcionario/listar/listar.module').then((m) => m.ListarModule),
                         canActivate: [AppRouteGuard]
