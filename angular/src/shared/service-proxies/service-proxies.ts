@@ -206,7 +206,7 @@ export class ConfigurationServiceProxy {
 }
 
 @Injectable()
-export class ApiServiceProxy {
+export class FuncionarioServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -220,8 +220,8 @@ export class ApiServiceProxy {
      * @param body (optional) 
      * @return OK
      */
-    funcionarioPost(body: CreateFuncionarioDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/funcionario";
+    create(body: CreateFuncionarioDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/funcionario/create";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -236,11 +236,11 @@ export class ApiServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFuncionarioPost(response_);
+            return this.processCreate(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFuncionarioPost(response_ as any);
+                    return this.processCreate(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -249,7 +249,7 @@ export class ApiServiceProxy {
         }));
     }
 
-    protected processFuncionarioPost(response: HttpResponseBase): Observable<void> {
+    protected processCreate(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -271,8 +271,11 @@ export class ApiServiceProxy {
     /**
      * @return OK
      */
-    funcionarioGet(): Observable<void> {
-        let url_ = this.baseUrl + "/api/funcionario";
+    findById(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/funcionario/findById/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -283,11 +286,11 @@ export class ApiServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFuncionarioGet(response_);
+            return this.processFindById(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFuncionarioGet(response_ as any);
+                    return this.processFindById(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -296,7 +299,54 @@ export class ApiServiceProxy {
         }));
     }
 
-    protected processFuncionarioGet(response: HttpResponseBase): Observable<void> {
+    protected processFindById(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    findAll(): Observable<void> {
+        let url_ = this.baseUrl + "/api/funcionario/findAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFindAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFindAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processFindAll(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -319,8 +369,8 @@ export class ApiServiceProxy {
      * @param body (optional) 
      * @return OK
      */
-    funcionarioPut(body: UpdateFuncionarioDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/funcionario";
+    update(body: UpdateFuncionarioDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/funcionario/update";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -335,11 +385,11 @@ export class ApiServiceProxy {
         };
 
         return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFuncionarioPut(response_);
+            return this.processUpdate(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFuncionarioPut(response_ as any);
+                    return this.processUpdate(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -348,7 +398,7 @@ export class ApiServiceProxy {
         }));
     }
 
-    protected processFuncionarioPut(response: HttpResponseBase): Observable<void> {
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -370,58 +420,8 @@ export class ApiServiceProxy {
     /**
      * @return OK
      */
-    funcionarioGet(id: number): Observable<void> {
-        let url_ = this.baseUrl + "/api/funcionario/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFuncionarioGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processFuncionarioGet(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<void>;
-        }));
-    }
-
-    protected processFuncionarioGet(response: HttpResponseBase): Observable<void> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @return OK
-     */
-    funcionarioDelete(id: number): Observable<void> {
-        let url_ = this.baseUrl + "/api/funcionario/{id}";
+    removeById(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/funcionario/removeById/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -435,11 +435,11 @@ export class ApiServiceProxy {
         };
 
         return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFuncionarioDelete(response_);
+            return this.processRemoveById(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFuncionarioDelete(response_ as any);
+                    return this.processRemoveById(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -448,7 +448,7 @@ export class ApiServiceProxy {
         }));
     }
 
-    protected processFuncionarioDelete(response: HttpResponseBase): Observable<void> {
+    protected processRemoveById(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
