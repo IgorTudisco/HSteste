@@ -21,6 +21,11 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard]
                     },
                     {
+                        path: 'cadastrar',
+                        loadChildren: () => import('./funcionario/cadastrar/cadastrar.module').then((m) => m.CadastrarModule),
+                        canActivate: [AppRouteGuard]
+                    },
+                    {
                         path: 'users',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
                         data: { permission: 'Pages.Users' },
