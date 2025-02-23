@@ -29,6 +29,7 @@ import { SidebarComponent } from "./layout/sidebar.component";
 import { SidebarLogoComponent } from "./layout/sidebar-logo.component";
 import { SidebarUserPanelComponent } from "./layout/sidebar-user-panel.component";
 import { SidebarMenuComponent } from "./layout/sidebar-menu.component";
+import { CadastrarComponent } from "./funcionario/cadastrar/cadastrar.component";
 
 describe("AppComponent", () => {
   beforeEach(() => {
@@ -37,6 +38,7 @@ describe("AppComponent", () => {
         AppComponent,
         HomeComponent,
         AboutComponent,
+        CadastrarComponent,
 
         // layout
         HeaderComponent,
@@ -78,7 +80,7 @@ describe("AppComponent", () => {
                 },
               },
             },
-            getShownLoginName: function(){
+            getShownLoginName: function () {
               return 'admin';
             }
           },
@@ -93,5 +95,5 @@ describe("AppComponent", () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  
+
 });
