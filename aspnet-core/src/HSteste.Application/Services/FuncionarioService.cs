@@ -19,13 +19,23 @@ namespace HSteste.Application.Services
     private readonly IRepository<Funcionario> _funcionarioRepository;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="funcionarioRepository"></param>
+    /// <param name="mapper"></param>
     public FuncionarioService(IRepository<Funcionario> funcionarioRepository, IMapper mapper)
     {
       _funcionarioRepository = funcionarioRepository;
       _mapper = mapper;
     }
 
-    [HttpPost("api/funcionario/")]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="createFuncionarioDto"></param>
+    /// <returns></returns>
+    [HttpPost("api/funcionario/create/")]
     public async Task<IResult> PostFuncionarioAsync([FromBody] CreateFuncionarioDto createFuncionarioDto)
     {
 
@@ -38,19 +48,28 @@ namespace HSteste.Application.Services
       return Results.Ok(funcionarioDto);
     }
 
-    [HttpGet("api/funcionario/{id}")]
-    public async Task<IResult> GetFuncionarioByIdAsync([FromRoute] int id)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("api/funcionario/findById/{id}")]
+    public async Task<IResult> GetFuncionarioByIdAsync([FromRoute] int? id)
     {
       if (id <= 0) return Results.BadRequest();
       if (id == null) return Results.NotFound();
 
-      var funcionario = _funcionarioRepository.Get(id);
+      var funcionario = _funcionarioRepository.Get(id!.Value);
       var funcionarioDto = _mapper.Map<GetFuncionarioDto>(funcionario);
 
-      return Results.Ok(funcionario);
+      return Results.Ok(funcionarioDto);
     }
 
-    [HttpGet("api/funcionario/")]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("api/funcionario/findAll/")]
     public async Task<IResult> GetAllFuncionariosAsync()
     {
       var funcionarios = _funcionarioRepository.GetAllList().ToList();
@@ -58,7 +77,12 @@ namespace HSteste.Application.Services
       return Results.Ok(funcionarioDto);
     }
 
-    [HttpPut("api/funcionario/")]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="updateFuncionarioDto"></param>
+    /// <returns></returns>
+    [HttpPut("api/funcionario/update/")]
     public async Task<IResult> PutFuncionarioAsync([FromBody] UpdateFuncionarioDto updateFuncionarioDto)
     {
       if (updateFuncionarioDto is null || updateFuncionarioDto.Id == null)
@@ -67,17 +91,22 @@ namespace HSteste.Application.Services
       }
 
       var funcionario = _mapper.Map<Funcionario>(updateFuncionarioDto);
-      funcionario = _funcionarioRepository.Update(funcionario);
+      _funcionarioRepository.Update(funcionario);
 
       return Results.NoContent();
     }
 
-    [HttpDelete("api/funcionario/{id}")]
-    public async Task<IResult> DeleteFuncionarioAsync([FromRoute] int id)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpDelete("api/funcionario/removeById/{id}")]
+    public async Task<IResult> DeleteFuncionarioAsync([FromRoute] int? id)
     {
       if (id <= 0) return Results.BadRequest();
       if (id == null) return Results.NotFound();
-      await _funcionarioRepository.DeleteAsync(id);
+      await _funcionarioRepository.DeleteAsync(id!.Value);
       return Results.NoContent();
     }
 

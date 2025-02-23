@@ -26,7 +26,7 @@ namespace HSteste.Application.Services
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public Task<IResult> GetFuncionarioByIdAsync([FromRoute] int id);
+    public Task<IResult> GetFuncionarioByIdAsync([FromRoute] int? id);
 
     /// <summary>
     /// 
@@ -49,7 +49,7 @@ namespace HSteste.Application.Services
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    public Task<IResult> DeleteFuncionarioAsync([FromRoute] int id);
+    public Task<IResult> DeleteFuncionarioAsync([FromRoute] int? id);
 
   }
 }
