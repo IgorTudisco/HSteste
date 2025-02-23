@@ -6,8 +6,9 @@ services:
   #   depends_on:
   #     - postgres
   #   environment:
-  #     ASPNETCORE_ENVIRONMENT: 'Staging'
-  #     ConnectionStrings__Default: 'Server=postgres;Port=5432; Database=HStesteDb; Username=postgres;Password=@Root123;'
+  #     POSTGRES_USER: 'postgres'
+  #     POSTGRES_PASSWORD: '@Root123'
+  #     POSTGRES_DB: 'HStesteDb'
   #     App__ServerRootAddress: 'http://localhost:44311/'
   #     App__ClientRootAddress: 'http://localhost:4200/'
   #     App__CorsOrigins: 'http://localhost:4200'
