@@ -30,6 +30,7 @@ import { SidebarLogoComponent } from "./layout/sidebar-logo.component";
 import { SidebarUserPanelComponent } from "./layout/sidebar-user-panel.component";
 import { SidebarMenuComponent } from "./layout/sidebar-menu.component";
 import { CadastrarComponent } from "./funcionario/cadastrar/cadastrar.component";
+import { ListarComponent } from "./funcionario/listar/listar.component";
 
 describe("AppComponent", () => {
   beforeEach(() => {
@@ -39,6 +40,7 @@ describe("AppComponent", () => {
         HomeComponent,
         AboutComponent,
         CadastrarComponent,
+        ListarComponent,
 
         // layout
         HeaderComponent,

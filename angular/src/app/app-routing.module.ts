@@ -26,6 +26,11 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard]
                     },
                     {
+                        path: 'listar',
+                        loadChildren: () => import('./funcionario/listar/listar.module').then((m) => m.ListarModule),
+                        canActivate: [AppRouteGuard]
+                    },
+                    {
                         path: 'users',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
                         data: { permission: 'Pages.Users' },
