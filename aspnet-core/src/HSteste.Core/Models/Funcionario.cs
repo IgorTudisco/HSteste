@@ -6,10 +6,8 @@ namespace HSteste.Core.Models
 {
 
   [Table("Funcionarios")]
-  public class Funcionario : Entity
+  public class Funcionario : Entity<int>
   {
-    [Key]
-    public int? Id { get; set; }
     public string? Nome { get; set; }
     public string? Cpf { get; set; }
     public string? Email { get; set; }

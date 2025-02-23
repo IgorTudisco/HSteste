@@ -35,7 +35,7 @@ namespace HSteste.Application.Services
     /// </summary>
     /// <param name="createFuncionarioDto"></param>
     /// <returns></returns>
-    [HttpPost("api/funcionario/create/")]
+    [HttpPost("api/funcionario/PostFuncionarioAsync/")]
     public async Task<IResult> PostFuncionarioAsync([FromBody] CreateFuncionarioDto createFuncionarioDto)
     {
 
@@ -53,7 +53,7 @@ namespace HSteste.Application.Services
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("api/funcionario/findById/{id}")]
+    [HttpGet("api/funcionario/GetFuncionarioByIdAsync/{id}")]
     public async Task<IResult> GetFuncionarioByIdAsync([FromRoute] int? id)
     {
       if (id <= 0) return Results.BadRequest();
@@ -69,7 +69,7 @@ namespace HSteste.Application.Services
     /// 
     /// </summary>
     /// <returns></returns>
-    [HttpGet("api/funcionario/findAll/")]
+    [HttpGet("api/funcionario/GetAllFuncionariosAsync")]
     public async Task<IResult> GetAllFuncionariosAsync()
     {
       var funcionarios = _funcionarioRepository.GetAllList().ToList();
@@ -82,7 +82,7 @@ namespace HSteste.Application.Services
     /// </summary>
     /// <param name="updateFuncionarioDto"></param>
     /// <returns></returns>
-    [HttpPut("api/funcionario/update/")]
+    [HttpPut("api/funcionario/PutFuncionarioAsync/")]
     public async Task<IResult> PutFuncionarioAsync([FromBody] UpdateFuncionarioDto updateFuncionarioDto)
     {
       if (updateFuncionarioDto is null || updateFuncionarioDto.Id == null)
@@ -101,7 +101,7 @@ namespace HSteste.Application.Services
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpDelete("api/funcionario/removeById/{id}")]
+    [HttpDelete("api/funcionario/DeleteFuncionarioAsync/{id}")]
     public async Task<IResult> DeleteFuncionarioAsync([FromRoute] int? id)
     {
       if (id <= 0) return Results.BadRequest();
